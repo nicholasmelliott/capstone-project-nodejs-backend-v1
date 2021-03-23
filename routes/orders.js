@@ -5,7 +5,8 @@ const Order = require("../models").Order;
 const Person = require("../models").Person;
 const Product = require("../models").Product;
 const Dimension = require("../models").Dimension;
-const cart = require('../cart');
+const Hardware = require("../models").Hardware;
+
 
 const services = [
   {
@@ -63,6 +64,10 @@ router.get('/', function(req, res, next) {
         include: [
           {
             model: Dimension
+          },
+          {
+            model: Hardware,
+            as: 'hardware'
           }
         ]
       }
