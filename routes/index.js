@@ -6,7 +6,7 @@ const Person = require("../models").Person;
 const Product = require("../models").Product;
 const Dimension = require("../models").Dimension;
 const fetch = require('node-fetch');
-const config = require('../config.js')
+//const config = require('../config.js')
 
 let locationID;
 let weatherJSON;
@@ -156,7 +156,8 @@ router.post('/insects', function(req, res, next) {
   Promise.resolve().then(() => {
     getInsects(req.body.state)
     .then(insectArry => {
-      getInsectPhoto(insectArry)
+      // getInsectPhoto(insectArry)
+      Promise.resolve()
         .then(()=>{
           res.json(insectJSON);
           res.status(200).end();
