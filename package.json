@@ -1,6 +1,6 @@
 {
   "name": "capstone-project-v1",
-  "version": "0.0.0",
+  "version": "12.16.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
