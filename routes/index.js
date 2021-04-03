@@ -111,7 +111,7 @@ const getInsects = (state) => {
                     USStates.push(nation.subnations);
                   }
                 });
-                insectJSON.push({commonName: species.primaryCommonName, sciName: species.scientificName, url: species.nsxUrl, subNations: USStates, photo: []});
+                insectJSON.push({commonName: species.primaryCommonName, sciName: species.scientificName, url: species.nsxUrl, subNations: USStates, informalTax: species.speciesGlobal.informalTaxonomy ,photo: []});
                 ranNums.shift();
               }
             });
