@@ -1,0 +1,18 @@
+div(class="d-none d-md-block services-main")
+ div(class="d-flex")
+  each service in services
+   div(class="card col", style="width: 18rem;")
+    img(class="card-img-top mt-2", src=service.imgSrc, alt="Card image cap")
+    div(class="card-body pl-0 pr-0")
+     h5(class="card-title")= service.type
+     p(class="card-text")= service.desc
+    div(class="card-footer text-muted service-card-footer")
+     a(href="/orders", class="btn btn-outline-secondary font-weight-bold btn-md btn-block footer")= service.btn
+
+div(class="d-md-none services-small")
+ div(class="d-flex justify-content-around flex-wrap")
+  each service in services
+   div(class="col-4 content-justify-center mt-2")
+    a(href="/orders")
+     img(src=service.imgSrc, alt="Card image cap", width="80px", height="auto")
+     p= service.type

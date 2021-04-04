@@ -1,0 +1,28 @@
+block content
+ each order in orders
+  if order.complete
+   div(class='d-flex complete-item')
+    div(class="col-9")
+     div(class="row ml-1 name-title")
+      if order.orders
+       h4(class="font-weight-bold ml-2 mt-3")= order.orders.fName + " " + order.orders.lName
+      else if order.companyOrders
+       h4(class="font-weight-bold ml-2 mt-3")= order.companyOrders.name
+      else
+       h4(class="font-weight-bold ml-2 mt-3") NO NAME
+     div(class="row ml-2 mt-2")
+      ul(class="list-group" style="width:100%")  
+       if order.products
+        each product in order.products
+         if product.Dimension
+          li(class="list-group-item p-0 d-flex inline-block")
+           h8(class="col-1 font-weight-bold text-center m-0 p-0")= product.quantity
+           h8(class="col-8 m-0 p-0 text-left text-uppercase")=  "  -  " + product.Dimension.width + "'' x " + product.Dimension.height + "''" + " " + product.type 
+           h8(class="col-3 font-weight-bold m-0 p-0 text-left text-uppercase", style="color:gray")= order.type
+       li(class="list-group-item p-0 d-flex inline-block")
+        if order.products
+         h6(class="col-1 p-0 font-italic font-weight-bold")= order.products.length   
+         h8(class="col-3 p-0 font-italic text-left") Total Items
+    div(class="col-3") 
+     img(src="check2-circle.svg", width="auto", height="70px")
+     h6(style="color:white;font-size:10px") Order Complete.

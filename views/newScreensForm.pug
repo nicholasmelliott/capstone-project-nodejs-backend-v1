@@ -1,0 +1,72 @@
+block content
+ h1(class="font-weight-bold") Build New Screens    
+ div(class="form-group row")  
+  label(class="mt-2", for="quantity") Please select a quantity:
+  select(id="quantity", class="form-control", name="quantity")
+   each num in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+    option(value=num)= num 
+ div(class="row")
+  label(class="form-row ml-1", for="width") Please enter the screen's dimensions:
+ div(class="row")
+  div(class="form-row mt-2")
+   div(class="form-group col") 
+       input(id="width", class="form-control", name="width" placeholder='24 7/16')
+       label(for='width') Width
+   div(class="form-group col-1") X 
+   div(class="form-group col") 
+       input(id="height", class="form-control", name="height" placeholder='32 7/16')
+       label(for='height') Height
+   div(class="form-group col-1") X   
+   div(class="form-group col") 
+       input(id="depth", class="form-control", name="depth" placeholder='7/16')
+       label(for='depth') Depth
+ div(class="row")     
+   div(class="form-group")  
+    label(class="mt-2", for="frameType") Please select the frame type:
+    select(id="frameType", name="frameType", class="form-control")
+     option(value="standard") Standard
+     option(value="storm") Storm
+ div(class="row")     
+   div(class="form-group")  
+    label(class="mt-2", for="frameColor") Please select the frame color:
+    select(id="frameColor", name="frameColor", class="form-control")
+     option(value="white") White
+     option(value="bronze") Bronze
+     option(value="mill") Mill
+     option(value="sandstone") Sandstone
+     option(value="almond") Almond
+     option(value="black") Black
+ div(class="row")      
+  div(class="form-group")  
+   label(class="mt-2", for="screenColorType") Please select the screen color and material:
+   select(id="screenColorType", name="screenColorType", class="form-control")
+    option(value="charFib") Charcoal Fiberglass
+    option(value="grayFib") Gray Fiberglass
+    option(value="charAlum") Charcoal Aluminum
+    option(value="millAlum") Mill Aluminum
+    option(value="blackAlum") Black Aluminum
+    option(value="blackPet") Black PetSafe
+    option(value="grayPet") Gray PetSafe   
+  button.btn.btn-primary.btn-block.footer.mb-2(id="nScreenAddBtn", type="button") Add to Order  
+  a(href="/orders") Checkout Cart
+
+ script(type="text/javascript").
+    document.getElementById('nScreenAddBtn').addEventListener("click", function() {
+        const quantity = document.getElementById('quantity').value;
+        const width = document.getElementById('width').value;
+        const height = document.getElementById('height').value;
+        const depth = document.getElementById('depth').value;
+        const frameType = document.getElementById('frameType').value;
+        const frameColor = document.getElementById('frameColor').value;
+        const screenColorType = document.getElementById('screenColorType').value;
+    
+        cart.push({
+            "quantity": quantity,
+            "width": width,
+            "height": height,
+            "depth": depth,
+            "frameType": frameType,
+            "frameColor": frameColor,
+            "screenColorType": screenColorType
+        });
+    });
