@@ -23,11 +23,31 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Sync sequelize w/ database; un-seed and then re-seed database; finally, listen on provided port, on all network interfaces.
  */
 
-sequelize.sync().then(function(){
-  server.listen(port);
+sequelize.sync().then(async function(){
+  
+  const { exec } = require('child_process');
+
+  exec('npx sequelize-cli db:seed:undo:all', (err, stdout, stderr) => {
+    if (err) {
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
+    exec('npx sequelize-cli db:seed:all', (err, stdout, stderr) => {
+      if (err) {
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    
+      server.listen(port);
+    });
+  });
+
+ 
 });
 server.on('error', onError);
 server.on('listening', onListening);
