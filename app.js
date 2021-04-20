@@ -11,6 +11,9 @@ var orderRouter = require('./routes/orders');
 
 var app = express();
 
+const cors = require('cors');
+app.use(cors({origin: 'https://screenandglassrepair.com'}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
