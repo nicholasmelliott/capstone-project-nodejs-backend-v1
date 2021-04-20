@@ -12,7 +12,7 @@ var orderRouter = require('./routes/orders');
 var app = express();
 
 const cors = require('cors');
-app.use(cors({origin: 'https://screenandglassrepair.com'}));
+app.use(cors({origin: 'https://www.screenandglassrepair.com'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
