@@ -16,7 +16,7 @@ module.exports = {
      },
      {
         quantity: 3,
-        type:'strom screen',
+        type:'storm screen',
         createdAt: new Date(),
         updatedAt: new Date()
      },
