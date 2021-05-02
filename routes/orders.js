@@ -6,47 +6,10 @@ const Person = require("../models").Person;
 const Product = require("../models").Product;
 const Dimension = require("../models").Dimension;
 const Hardware = require("../models").Hardware;
+const Frame = require("../models").Frame;
+const OrderProduct = require("../models").OrderProduct;
 
-
-const services = [
-  {
-    type: "Build new screens",
-    desc: "Choose the color of your: frame, screen, hardware, etc.",
-    imgSrc: "border-outer.svg",
-    btn: "Build",
-    href: "bScreens"
-  },
-  {
-    type: "Build new windows",
-    desc: "Choose the color of your: frame, screen, hardware, etc.",
-    imgSrc: "border-all.svg",
-    btn: "Build",
-    href: "bWindows"
-  },
-  {
-    type: "Restore old screens",
-    desc: "Bring your house to life by repairing those old, dirty, torn screens.",
-    imgSrc: "layers-fill.svg",
-    btn: "Restore",
-    href: "rScreens"
-  },
-  {
-    type: "Restore old windows",
-    desc: "Defeat the winter's cold air and revamp your old storm windows.",
-    imgSrc: "layers-half.svg",
-    btn: "Restore",
-    href: "rWindows"
-  },
-  {
-    type: "Custom Glass",
-    desc: "Need glass? We can cut to size or shape depending on your needs.",
-    imgSrc: "columns-gap.svg",
-    btn: "Custom Glass",
-    href: "cGlass"
-  },
-];
-
-//Create an order
+//Retrieve all orders
 router.get('/', function(req, res, next) {
   Order.findAll({
     include: [
@@ -73,18 +36,80 @@ router.get('/', function(req, res, next) {
       }
     ]
   }).then(orders => {
+    console.log(orders);
     res.json(orders);
   });
 });
 
+//Create an order for testing purposes
+// router.post('/', function(req, res, next) {
+//   OrderProduct.create(req.body).then((res) => {
+//   }).then(() => {
+//     res.status(201).end();
+//   });
+// });
+
 router.post('/', function(req, res, next) {
-  // Product.create(req.body).then((res) => {
-  // }).then(() => {
-  //   res.status(201).end();
-  // });
-  console.log(req.body);
-  res.redirect("/orders");
-  //res.status(201).json(req.body).end();
+ console.log(req.body);
+ const prods = req.body;
+ prods.forEach(async prod => {
+  let person;
+  let order;
+  let product;
+  let dimensions;
+  let frame;
+  let hardware;
+  const entryModels = [
+    Order.create({
+      type: prod.service,
+      complete: false
+    }), 
+    Product.create({
+      quantity: prod.details.quantity,
+      type: prod.product
+    }),
+    Dimension.create({
+      width: prod.details.width[0].int + prod.details.width[0].decimals,
+      height: prod.details.height[0].int + prod.details.height[0].decimals,
+      depth: prod.details.depth[0].int + prod.details.depth[0].decimals
+    })
+  ];
+  if(prod.product !== "customGlass"){
+    entryModels.push(
+      Frame.create({
+        type: prod.details.fType,
+        color: prod.details.fColor
+      })
+    );  
+  }
+  if(prod.details.hardware != []){
+    const allHardware = []
+    await prod.details.hardware.forEach((hardware, i) => {
+      allHardware.push({
+        type: hardware.type,
+        material: hardware.fromLoc,
+        color: hardware.dist
+      })
+    });
+    entryModels.push(
+      Hardware.bulkCreate(allHardware)
+    );  
+  }
+  const instances = await Promise.all(entryModels)
+    .catch( err => {
+      res.status(500).end();
+      throw new Error("New OrderProduct creation: " + err);
+    });
+  
+  [ order, product, dimensions, frame, hardware ] = instances;
+
+  product.addHardware(hardware);
+  product.setDimension(dimensions);
+  product.addFrames(frame);
+  order.addProducts(product);
+
+ });
+ res.status(201).end();
 });
 
     
