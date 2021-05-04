@@ -74,7 +74,13 @@ module.exports = {
         productId: 2, 
         createdAt: new Date(),
         updatedAt: new Date()
-     }
+     },
+     {
+      orderId: 6,
+      productId: 5, 
+      createdAt: new Date(),
+      updatedAt: new Date()
+      }
     ], {});
   },
 
