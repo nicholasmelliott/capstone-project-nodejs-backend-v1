@@ -11,6 +11,9 @@ module.exports = {
       type: {
         type: Sequelize.STRING
       },
+      service: {
+        type: Sequelize.STRING
+      },
       comments: {
         type: Sequelize.TEXT
       },

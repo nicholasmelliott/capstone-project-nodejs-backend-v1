@@ -5,24 +5,28 @@ module.exports = {
     await queryInterface.bulkInsert('Products', [{
         quantity: 2,
         type:'storm window',
+        service: 'build',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {
         quantity: 4,
         type:'glass',
+        service: 'cut glass',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {
         quantity: 3,
         type:'storm screen',
+        service: 'repair',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {  
         quantity: 19,
         type:'screen',
+        service: 'repair',
         createdAt: new Date(),
         updatedAt: new Date()
      },
@@ -30,12 +34,14 @@ module.exports = {
 
         quantity: 12,
         type:'window',
+        service: 'build',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {
-        quantity: 1,
+        quantity: 8,
         type:'glass',
+        service: 'cut glass',
         createdAt: new Date(),
         updatedAt: new Date()
      }
