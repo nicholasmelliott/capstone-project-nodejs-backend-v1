@@ -33,7 +33,11 @@ let insectJSON = [];
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        weatherJSON = { weatherIMG: `https://www.metaweather.com/static/img/weather/${data.consolidated_weather[0].weather_state_abbr}.svg`};
+        weatherJSON = { 
+          weatherIMG: `https://www.metaweather.com/static/img/weather/${data.consolidated_weather[0].weather_state_abbr}.svg`,
+          title: data.title,
+          currTemp: data.consolidated_weather[0].the_temp
+        };
      }).catch(err => {
       console.error("Fetching local weather from MetaWeather API: " + err)
     });;
