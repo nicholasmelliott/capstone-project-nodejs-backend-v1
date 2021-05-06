@@ -31,7 +31,6 @@ module.exports = {
         updatedAt: new Date()
      },
      {
-
         quantity: 12,
         type:'window',
         service: 'build',
@@ -42,6 +41,13 @@ module.exports = {
         quantity: 8,
         type:'glass',
         service: 'cut glass',
+        createdAt: new Date(),
+        updatedAt: new Date()
+     },
+     {
+        quantity: 5,
+        type:'window',
+        service: 'build',
         createdAt: new Date(),
         updatedAt: new Date()
      }

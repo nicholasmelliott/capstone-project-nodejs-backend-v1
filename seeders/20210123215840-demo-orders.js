@@ -45,6 +45,34 @@ module.exports = {
         comments: 'Cutting 15 pieces of glass @ 34 x 72.', 
         createdAt: new Date(),
         updatedAt: new Date()
+     },
+     {
+        personId: 3,
+        type:'Build',
+        complete: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+     },
+     {
+        personId: 4,
+        type:'Repair',
+        complete: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+     },
+     {
+        personId: 5,
+        type:'Repair',
+        complete: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+     },
+     {
+        companyId: 3,
+        type:'Build',
+        complete: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
      }
     ], {});
   },
