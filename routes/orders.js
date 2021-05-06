@@ -53,6 +53,9 @@ router.post('/', function(req, res, next) {
  console.log(req.body);
  const prods = req.body;
  prods.forEach(async prod => {
+  const combWidth = parseInt(prod.details.width[0].int) + parseFloat(prod.details.width[0].decimals);
+  const combHeight = parseInt(prod.details.height[0].int) + parseFloat(prod.details.height[0].decimals);
+  const combDepth = prod.details.depth[0].int || prod.details.depth[0].decimals ? parseInt(prod.details.depth[0].int) + parseFloat(prod.details.depth[0].decimals) : "";
   let person;
   let order;
   let product;
@@ -66,35 +69,38 @@ router.post('/', function(req, res, next) {
     }), 
     Product.create({
       quantity: prod.details.quantity,
-      type: prod.product
+      type: prod.product,
+      service: prod.service
     }),
     Dimension.create({
-      width: prod.details.width[0].int + prod.details.width[0].decimals,
-      height: prod.details.height[0].int + prod.details.height[0].decimals,
-      depth: prod.details.depth[0].int + prod.details.depth[0].decimals
+      width: combWidth,
+      height: combHeight,
+      depth: combDepth
     })
   ];
-  if(prod.product !== "customGlass"){
+  if(prod.product !== "Glass"){
     entryModels.push(
       Frame.create({
         type: prod.details.fType,
         color: prod.details.fColor
       })
-    );  
+    ); 
+    
+    if(prod.details.hardware[0].type != '' && prod.details.hardware[0].fromLoc != '' && prod.details.hardware[0].dist != ''){
+      const allHardware = []
+      await prod.details.hardware.forEach((hardware, i) => {
+        allHardware.push({
+          type: hardware.type,
+          material: hardware.fromLoc,
+          color: hardware.dist
+        })
+      });
+      entryModels.push(
+        Hardware.bulkCreate(allHardware)
+      );  
+    } 
   }
-  if(prod.details.hardware != []){
-    const allHardware = []
-    await prod.details.hardware.forEach((hardware, i) => {
-      allHardware.push({
-        type: hardware.type,
-        material: hardware.fromLoc,
-        color: hardware.dist
-      })
-    });
-    entryModels.push(
-      Hardware.bulkCreate(allHardware)
-    );  
-  }
+
   const instances = await Promise.all(entryModels)
     .catch( err => {
       res.status(500).end();
