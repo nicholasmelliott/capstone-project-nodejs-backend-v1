@@ -8,39 +8,33 @@ const Dimension = require("../models").Dimension;
 const fetch = require('node-fetch');
 //const config = require('../config.js')
 
-let locationID;
 let weatherJSON;
 let insectJSON = [];
 
- const getWeather = async (coords) => {
-    //Get location from MetaWeather API
-    await fetch(`https://www.metaweather.com/api/location/search/?lattlong=${coords.latitude},${coords.longitude}`, {
+ const getWeather = (coords, res) => {
+    //Get woeId from MetaWeather API and then get weather with woeID from MetaWeather API
+    fetch(`https://www.metaweather.com/api/location/search/?lattlong=${coords.latitude},${coords.longitude}`, {
       method: 'get',
       headers: {'Content-Type':'application/json'},
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data[0]);
-        locationID = data[0].woeid;
-      }).catch(err => {
-        console.error("Fetching user coords from MetaWeather API: " + err)
+    .then(res => res.json())
+    .then(data => {
+      return fetch(`https://www.metaweather.com/api/location/${data[0].woeid}`, {
+        method: 'get',
+        headers: {'Content-Type':'application/json'},
       });
-    //Get local weather from MetaWeather API  
-    fetch(`https://www.metaweather.com/api/location/${locationID}`, {
-      method: 'get',
-      headers: {'Content-Type':'application/json'},
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        weatherJSON = { 
+    .then(res => res.json())
+    .then(data => {
+        res.json({ 
           weatherIMG: `https://www.metaweather.com/static/img/weather/${data.consolidated_weather[0].weather_state_abbr}.svg`,
           title: data.title,
           currTemp: data.consolidated_weather[0].the_temp
-        };
+        });
+        res.status(200).end();
      }).catch(err => {
-      console.error("Fetching local weather from MetaWeather API: " + err)
-    });;
+        console.error("Fetching user coords then local weather from MetaWeather API: " + err)
+     });
  }     
 
  //Get local insects
@@ -143,16 +137,9 @@ const getInsectPhoto = (insectArry) => {
   return Promise.all(promises);
 };
 
-//Get weather
-router.get('/weather', function(req, res, next) {  
-  res.json(weatherJSON);
-});
-
 router.post('/', function(req, res, next) {  
   Promise.resolve().then(() => {
-    coords = req.body;
-    getWeather(req.body);
-    res.status(200).end();
+    getWeather(req.body, res);
   }).catch(next);
 });
 
