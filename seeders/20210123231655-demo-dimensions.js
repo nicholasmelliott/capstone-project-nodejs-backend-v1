@@ -39,6 +39,20 @@ module.exports = {
         height: 10.70,
         createdAt: new Date(),
         updatedAt: new Date()
+     },
+     {
+        productId: 6, 
+        width: 24.75,
+        height: 32.9,
+        createdAt: new Date(),
+        updatedAt: new Date()
+     },
+     {
+        productId: 7, 
+        width: 32.1825,
+        height: 80.5,
+        createdAt: new Date(),
+        updatedAt: new Date()
      }
     ], {});
   },

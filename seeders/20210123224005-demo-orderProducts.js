@@ -140,19 +140,18 @@ module.exports = {
          productId: 5, 
          createdAt: new Date(),
          updatedAt: new Date()
+      },
+      {
+         orderId: 11,
+         productId: 6, 
+         createdAt: new Date(),
+         updatedAt: new Date()
+      },{
+         orderId: 11,
+         productId: 7, 
+         createdAt: new Date(),
+         updatedAt: new Date()
       }
-      // ,
-      // {
-      //    orderId: 11,
-      //    productId: 6, 
-      //    createdAt: new Date(),
-      //    updatedAt: new Date()
-      // },{
-      //    orderId: 11,
-      //    productId: 7, 
-      //    createdAt: new Date(),
-      //    updatedAt: new Date()
-      // }
     ], {});
   },
 

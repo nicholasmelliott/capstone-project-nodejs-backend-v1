@@ -73,6 +73,13 @@ module.exports = {
         complete: true,
         createdAt: new Date(),
         updatedAt: new Date()
+     },
+     {
+        companyId: 3,
+        type:'Build',
+        complete: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
      }
     ], {});
   },
