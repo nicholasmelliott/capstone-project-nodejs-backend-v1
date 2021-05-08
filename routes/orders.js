@@ -64,6 +64,10 @@ router.post('/', function(req, res, next) {
   let frame;
   let hardware;
   const entryModels = [
+    Person.create({
+      fName: prod.user.fName,
+      lName: prod.user.lName
+    }),
     Order.create({
       type: prod.service,
       complete: false
@@ -108,12 +112,13 @@ router.post('/', function(req, res, next) {
       throw new Error("New OrderProduct creation: " + err);
     });
   
-  [ order, product, dimensions, frame, hardware ] = instances;
+  [ person, order, product, dimensions, frame, hardware ] = instances;
 
   product.addHardware(hardware);
   product.setDimension(dimensions);
   product.addFrames(frame);
   order.addProducts(product);
+  person.addOrders(order);
 
  });
  res.status(201).end();
