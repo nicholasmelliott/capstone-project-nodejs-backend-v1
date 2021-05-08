@@ -36,7 +36,6 @@ router.get('/', function(req, res, next) {
       }
     ]
   }).then(orders => {
-    console.log(orders);
     res.json(orders);
   });
 });
@@ -50,12 +49,14 @@ router.get('/', function(req, res, next) {
 // });
 
 router.post('/', function(req, res, next) {
- console.log(req.body);
  const prods = req.body;
  prods.forEach(async prod => {
-  const combWidth = parseInt(prod.details.width[0].int) + parseFloat(prod.details.width[0].decimals);
-  const combHeight = parseInt(prod.details.height[0].int) + parseFloat(prod.details.height[0].decimals);
-  const combDepth = prod.details.depth[0].int || prod.details.depth[0].decimals ? parseInt(prod.details.depth[0].int) + parseFloat(prod.details.depth[0].decimals) : "";
+  const widthInt = prod.details.width[0].int ? parseInt(prod.details.width[0].int) : "";
+  const widthDec = prod.details.width[0].Dec ? parseFloat(prod.details.width[0].decimals): "";
+  const heightInt = prod.details.height[0].int ? parseInt(prod.details.height[0].int) : "";
+  const heightDec = prod.details.height[0].decimals ? parseFloat(prod.details.height[0].decimals) : "";
+  const depthInt = prod.details.depth[0].int || prod.details.depth[0].decimals ? parseInt(prod.details.depth[0].int) : ""
+  const depthDec = prod.details.depth[0].decimals ? parseFloat(prod.details.depth[0].decimals) : "";
   let person;
   let order;
   let product;
@@ -73,9 +74,9 @@ router.post('/', function(req, res, next) {
       service: prod.service
     }),
     Dimension.create({
-      width: combWidth,
-      height: combHeight,
-      depth: combDepth
+      width: widthInt + widthDec,
+      height: heightInt + heightDec,
+      depth: depthInt + depthDec
     })
   ];
   if(prod.product !== "Glass"){
