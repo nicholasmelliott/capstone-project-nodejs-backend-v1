@@ -6,8 +6,7 @@ const Person = require("../models").Person;
 const Product = require("../models").Product;
 const Dimension = require("../models").Dimension;
 const fetch = require('node-fetch');
-//const config = require('../config.js')
-
+const API_KEY = process.env.API_KEY;
 let weatherJSON;
 let insectJSON = [];
 
@@ -126,7 +125,7 @@ const getInsects = (state) => {
 const getInsectPhoto = (insectArry) => {
   console.log(insectArry[0]);
   const promises = insectArry.map((insect, i) => {
-    return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${config}&tags=${insect.sciName}&license=1,2,3,5&per_page=24&extras=url_m&format=json&nojsoncallback=1`)
+    return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&tags=${insect.sciName}&license=1,2,3,5&per_page=24&extras=url_m&format=json&nojsoncallback=1`)
       .then(res => res.json())
       .then(json => {
         json.photos.photo[0] ? insectJSON[i].photo.push(json.photos.photo[0].url_m) : " ";
@@ -147,8 +146,7 @@ router.post('/insects', function(req, res, next) {
   Promise.resolve().then(() => {
     getInsects(req.body.state)
     .then(insectArry => {
-      // getInsectPhoto(insectArry)
-      Promise.resolve()
+      getInsectPhoto(insectArry)
         .then(()=>{
           res.json(insectJSON);
           res.status(200).end();
