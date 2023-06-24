@@ -50,7 +50,7 @@ const getInsects = (state) => {
       }],
       "pagingOptions" : {
         "page" : 0,
-        "recordsPerPage" : 10000
+        "recordsPerPage" : 100
       },
       "speciesTaxonomyCriteria": [
         {
@@ -85,7 +85,15 @@ const getInsects = (state) => {
       body:    JSON.stringify(speciesBody),
       headers: { 'Content-Type': 'application/json' },
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(json => {
+            const err = json.message + ' - ' + json.error;
+            throw err;
+          });
+        }
+        return res.json();
+      })
       .then(async json => {    
         const ranNums = [];  
         //Create x number of random numbers between 0 and response results length    
