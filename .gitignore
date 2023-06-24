@@ -69,6 +69,7 @@ typings/
 
 
 # Pug Views to be converted to JSX
-
+/views
+/public
 /config.js
 package-lock.json
