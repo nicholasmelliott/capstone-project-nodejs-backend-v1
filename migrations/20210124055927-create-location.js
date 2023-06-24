@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      frameId: {
+        type: Sequelize.INTEGER
+      },
+      hardwareId: {
+        type: Sequelize.INTEGER
+      },
       bottomLeftToRight: {
         type: Sequelize.FLOAT
       },
