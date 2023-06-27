@@ -1,6 +1,6 @@
 # Express Screen and Window API
 
-This project is an Express.js application that provides various routes for managing orders, users, and other resources. It utilizes the Node.js runtime environment and connects to a database for data storage.
+This project is a server-side application built using Express.js framework in Node.js. It serves as a backend API for a screen and glass repair website. The application handles various routes for managing orders, users, and retrieving weather and insect information. It interacts with a database to store and retrieve data related to companies, orders, people, products, dimensions, frames, hardware, and more. The application utilizes external APIs, such as MetaWeather and Flickr, to fetch weather data and insect images. The code is organized into separate routes and leverages middleware for request processing and error handling.
 
 ## Setup
 
