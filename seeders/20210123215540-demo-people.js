@@ -4,26 +4,26 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
   
      await queryInterface.bulkInsert('People', [{
-        fName: 'John',
-        lName: 'Locke',
+        fName:  'Jacob',
+        lName: 'Brown',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {
-        fName: 'Jack',
-        lName: 'Shepard',
+        fName: 'Ava',
+        lName: 'Davis',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {
-        fName: 'Ben',
-        lName: 'Linus',
+        fName: 'Michael',
+        lName: 'Wilson',
         createdAt: new Date(),
         updatedAt: new Date()
      },
      {
-        fName: 'Kate',
-        lName: 'Austen',
+        fName: 'Mia',
+        lName: 'Taylor',
         createdAt: new Date(),
         updatedAt: new Date()
      },
@@ -34,8 +34,8 @@ module.exports = {
         updatedAt: new Date()
      },
      {
-        fName: 'Hugo',
-        lName: 'Reyes',
+        fName: 'William',
+        lName: 'Clark',
         createdAt: new Date(),
         updatedAt: new Date()
      }], {});

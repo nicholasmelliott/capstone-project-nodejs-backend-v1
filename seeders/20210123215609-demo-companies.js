@@ -4,22 +4,22 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
   
      await queryInterface.bulkInsert('Companies', [{
-        name: 'Island Protector Inc.',
-        comments: 'We believe we need to protect the island at all costs.',        
-        createdAt: new Date(),
-        updatedAt: new Date()
+         name: 'Local Heroes Handyman',
+         comments: "We go above and beyond to help you with all your home repair needs.",
+         createdAt: new Date(),
+         updatedAt: new Date()
      },
      {
-        name: 'Leader Company',
-        comments: "We lead even when we don't want to.",
-        createdAt: new Date(),
-        updatedAt: new Date()
+         name: 'DryShield Roofing',
+         comments: "We keep your house dry and protected with our top-notch roofing solutions.",
+         createdAt: new Date(),
+         updatedAt: new Date()
      },
      {
-        name: "Everybody's Friend Services",
-        comments: "We are everyone's friend. And don't you forget it!",       
-        createdAt: new Date(),
-        updatedAt: new Date()
+         name: 'City of Carmont',
+         comments: 'We are dedicated to promoting sustainable development and preserving the natural beauty of our city.',
+         createdAt: new Date(),
+         updatedAt: new Date()
      }], {});
 
   },
