@@ -19,6 +19,7 @@
     "pug": "^3.0.2",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "uuid": "^9.0.0"
   }
 }

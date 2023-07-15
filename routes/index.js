@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const uuid = require('uuid');
 const Company = require("../models").Company;
 const Order = require("../models").Order;
 const Person = require("../models").Person;
@@ -116,7 +117,7 @@ const getInsects = (state) => {
                     USStates.push(nation.subnations);
                   }
                 });
-                insectJSON.push({commonName: species.primaryCommonName, sciName: species.scientificName, url: species.nsxUrl, subNations: USStates, informalTax: species.speciesGlobal.informalTaxonomy ,photo: []});
+                insectJSON.push({id: uuid.v4(), commonName: species.primaryCommonName, sciName: species.scientificName, url: species.nsxUrl, subNations: USStates, informalTax: species.speciesGlobal.informalTaxonomy ,photo: []});
                 ranNums.shift();
               }
             });
