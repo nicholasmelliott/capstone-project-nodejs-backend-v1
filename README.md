@@ -2,17 +2,6 @@
 
 This project is a server-side application built using Express.js framework in Node.js. It serves as a backend API for a screen and glass repair website. The application handles various routes for managing orders, users, and retrieving weather and insect information. It interacts with a database to store and retrieve data related to companies, orders, people, products, dimensions, frames, hardware, and more. The application utilizes external APIs, such as MetaWeather and Flickr, to fetch weather data and insect images. The code is organized into separate routes and leverages middleware for request processing and error handling.
 
-## Setup
-
-1. Clone the repository: `git clone <repository-url>`
-2. Install the dependencies: `npm install`
-3. Set up environment variables by creating a `.env` file and adding the necessary configurations. Refer to the `.env.example` file for required variables.
-4. Start the application: `npm start`
-
-## Usage
-
-Once the application is running, you can access the various routes provided by the Express.js application.
-
 ### Routes
 
 - `/` - Home route
