@@ -40,7 +40,8 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
 
     await queryInterface.bulkDelete('Splines', null, {});
-
+    // Reset auto-increment counter for Splines
+    await queryInterface.sequelize.query("ALTER TABLE Splines AUTO_INCREMENT = 1");
   }
 };
 

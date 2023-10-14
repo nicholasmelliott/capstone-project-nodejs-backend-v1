@@ -62,7 +62,8 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
 
     await queryInterface.bulkDelete('Frames', null, {});
-
+    // Reset auto-increment counter for Frames
+    await queryInterface.sequelize.query("ALTER TABLE Frames AUTO_INCREMENT = 1");
   }
 };
 

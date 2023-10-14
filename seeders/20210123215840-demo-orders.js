@@ -87,6 +87,8 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
 
     await queryInterface.bulkDelete('Orders', null, {});
+    // Reset auto-increment counter for Orders
+    await queryInterface.sequelize.query("ALTER TABLE Orders AUTO_INCREMENT = 1");
 
   }
 };

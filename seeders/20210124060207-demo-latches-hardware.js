@@ -40,7 +40,8 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
 
     await queryInterface.bulkDelete('Hardware', null, {});
-
+    // Reset auto-increment counter for Hardware
+    await queryInterface.sequelize.query("ALTER TABLE Hardware AUTO_INCREMENT = 1");
   }
 };
 
