@@ -2,43 +2,24 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('CompanyPerson', [{
-        personId: 1,
-        companyId: 1,       
+    // Query actual IDs from Person and Company tables
+    const persons = await queryInterface.sequelize.query("SELECT id FROM People");
+    const companies = await queryInterface.sequelize.query("SELECT id FROM Companies");
+
+    // Prepare data for CompanyPerson using actual IDs
+    const companyPersonData = persons[0].map((person, index) => {
+      return {
+        personId: person.id,
+        companyId: companies[0][index % companies[0].length].id,
         createdAt: new Date(),
         updatedAt: new Date()
-     },
-     {
-        personId: 3,
-        companyId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-     },
-     {
-        personId: 2,
-        companyId: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-     },
-     {
-        personId: 6,
-        companyId: 3,
-        createdAt: new Date(),
-        updatedAt: new Date()
-     },
-     {
-        personId: 5,
-        companyId: 3, 
-        createdAt: new Date(),
-        updatedAt: new Date()
-     }
-    ], {});
+      };
+    });
+
+    // Now seed CompanyPerson table
+    await queryInterface.bulkInsert('CompanyPerson', companyPersonData);
   },
-
   down: async (queryInterface, Sequelize) => {
-
     await queryInterface.bulkDelete('CompanyPerson', null, {});
-
   }
 };
-
