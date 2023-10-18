@@ -25,6 +25,9 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
+    // Remove the foreign key constraint
+    await queryInterface.removeConstraint('CompanyPerson', 'CompanyPerson_ibfk_2');
+
     await queryInterface.dropTable('People');
   }
 };
